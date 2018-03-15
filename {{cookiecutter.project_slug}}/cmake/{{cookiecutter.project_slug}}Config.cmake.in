@@ -1,0 +1,45 @@
+# {{ cookiecutter.project_slug }}Config.cmake
+# --------------------
+#
+# {{ cookiecutter.project_slug }} cmake module.
+# This module sets the following variables in your project::
+#
+#   {{ cookiecutter.project_slug }}_FOUND - true if {{ cookiecutter.project_slug }} and all required components found on the system
+#   {{ cookiecutter.project_slug }}_VERSION - {{ cookiecutter.project_slug }} version in format Major.Minor.Release
+#   {{ cookiecutter.project_slug }}_PYMOD - path to {{ cookiecutter.project_slug }} python modules
+#
+#
+# Available components: None
+#
+#
+## Exported targets::
+##
+## If {{ cookiecutter.project_slug }} is found, this module defines the following :prop_tgt:`IMPORTED`
+## target. Target is always shared _or_ static, so, for both, use separate, not
+## overlapping, installations. ::
+##
+##   {{ cookiecutter.project_slug }}::core - the main {{ cookiecutter.project_slug }} library with libefp and pybind11 attached.
+#
+#
+# Suggested usage::
+#
+#   find_package({{ cookiecutter.project_slug }})
+#   find_package({{ cookiecutter.project_slug }} 0.1 EXACT CONFIG REQUIRED)
+#
+#
+# The following variables can be set to guide the search for this package::
+#
+#   {{ cookiecutter.project_slug }}_DIR - CMake variable, set to directory containing this Config file
+#   CMAKE_PREFIX_PATH - CMake variable, set to root directory of this package
+##   PATH - environment variable, set to bin directory of this package
+#   CMAKE_DISABLE_FIND_PACKAGE_{{ cookiecutter.project_slug }} - CMake variable, disables
+#     find_package({{ cookiecutter.project_slug }}) when not REQUIRED, perhaps to force internal build
+
+@PACKAGE_INIT@
+
+set(PN {{ cookiecutter.project_slug }})
+
+set(${PN}_PYMOD "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_LIBDIR@@PYMOD_INSTALL_LIBDIR@")
+
+check_required_components(${PN})
+
