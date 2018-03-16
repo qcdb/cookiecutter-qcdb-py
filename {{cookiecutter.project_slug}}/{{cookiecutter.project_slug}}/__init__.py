@@ -9,4 +9,5 @@ __email__ = '{{ cookiecutter.email }}'
 
 from .metadata import __version__, version_formatter
 from .driver import {{ cookiecutter.main_function }}
+from .read_options import load_defaults
 

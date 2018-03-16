@@ -46,22 +46,21 @@ options:
 """
 
     jrec = qcdb.yaml_run(yamlin)
-    #import yaml
-    #asdf = yaml.load(yamlin)
 
-    #ene = asdf['driver'](asdf['method'],
-    #                     options=asdf['options'],
-    #                     molecule=qcdb.Molecule(asdf['molecule']))
-
-    #assert compare_values(-38.9199888, ene, 6, 'calc from yaml str')  # ROHF
     assert compare_values(sys1_pk_rhf, float(jrec['qcvars']['HF TOTAL ENERGY'].data), 6, sys._getframe().f_code.co_name)
 
 
-def test_{{ cookiecutter.project_slug }}():
+def test_blank_{{ cookiecutter.project_slug }}_plugin():
+    import qcdb
+    import resp
+
+    h2o = qcdb.set_molecule("""
+  O 
+  H 1 0.96
+  H 1 0.96 2 104.5
+""")
     qcdb.set_options({'{{ cookiecutter.project_slug }}_kw1': 'cat'})
 
     import {{ cookiecutter.project_slug }}
-    jrec = {{ cookiecutter.project_slug }}.{{ cookiecutter.main_function }}('hf/cc-pvdz', molecule=mol)
+    jrec = {{ cookiecutter.project_slug }}.{{ cookiecutter.main_function }}('hf/cc-pvdz', molecule=h2o)
 
-    
-    
